@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+        }
+
+        .form {
+            margin-top: 5%;
+            width: 45%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="/my_pies">Welcom {{user.first_name}} {{user.last_name}}</a>
+        <a class="navbar-brand" href="/derby">Pie Derby</a>
+        <a class="navbar-brand" href="/my_pies">Dashbored</a>
+        <a href="/logout"><button class="btn btn-outline-success my-2 my-sm-0">Logout</button></a>
+    </nav>
+    <div class="container">
+    <div class="form">
+        <h1>Edit {{pie.name}}</h1>
+        <form action="/edit_pie" method="post">
+            {%csrf_token%}
+            <div class="form-group">
+                <label>Name </label>
+                <input type="text" class="form-control" placeholder="Enter name" name="name" value="{{pie.name}}">
+            </div>
+            <div class="form-group">
+                <label>Filling </label>
+                <input type="text" class="form-control" placeholder="Enter filling" name="filling" value="{{pie.filling}}">
+            </div>
+            <div class="form-group">
+                <label>Crust </label>
+                <input type="text" class="form-control" placeholder="Enter crust" name="crust" value="{{pie.crust}}">
+            </div>
+            <input type="hidden" name="pie_id" value="{{pie.id}}">
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+        {% if messages %}
+        <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
